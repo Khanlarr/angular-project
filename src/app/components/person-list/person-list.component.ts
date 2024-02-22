@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { MockDataService } from 'src/app/services/mock-data.servise';
 import { Person } from 'src/app/models/person.model';
-
+import { mockPersonData } from 'src/app/services/mock-data.servise';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 // export const mockPersonData: Person[] = [
 //   {
 //     id: 1,
@@ -33,20 +34,25 @@ import { Person } from 'src/app/models/person.model';
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.css']
 })
-export class PersonListComponent {
+export class PersonListComponent implements OnInit  {
   mockPersons: Person[] = [];
 
-  constructor(private mockDataService: MockDataService) {}
-
-  ngOnInit() {
-    this.mockDataService.mockData$.subscribe(data => {
-      this.mockPersons = data;
-    });
+  constructor(private dbService: NgxIndexedDBService){
   }
 
+  ngOnInit(): void {
+    mockPersonData.map(person => {
+      this.dbService
+      .add('people', person)
+      .subscribe((key) => {
+        console.log('key: ', key);
+      });
+    })
+  }
+  
+
+  
   removePerson(person: Person): void {
-    const newData = this.mockPersons.filter(p => p !== person);
-    this.mockDataService.updateMockData(newData);
-    this.mockPersons = newData;
+    
   }
 }
