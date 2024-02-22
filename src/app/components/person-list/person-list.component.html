@@ -1,0 +1,34 @@
+<div class="form-group">
+    <label for="filter">Filter:</label>
+    <select class="form-control" id="filter" >
+      <option value="">All</option>
+      <option *ngFor="let person of mockPersons" [value]="person.id">{{ person.name }}</option>
+    </select>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of mockPersons">
+        <td>{{ person.id }}</td>
+        <td>{{ person.name }}</td>
+        <td>{{ person.surname }}</td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.phoneNumber }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm mx-2" >Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="removePerson(person)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
