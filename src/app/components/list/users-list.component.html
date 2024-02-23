@@ -1,0 +1,79 @@
+<div class="px-3">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Number</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Random Color</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="users.length">
+      <tr *ngFor="let user of users; let i = index">
+        <td
+          scope="row"
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          {{ i + 1 }}
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          {{ user.name }}
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          {{ user.surname }}
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          {{ user.email }}
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          {{ user.number }}
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          <button class="btn btn-danger" (click)="deleteUser(user.id)">
+            Delete
+          </button>
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          <button
+            class="btn btn-primary"
+            [routerLink]="['/users/edit-user', user.id]"
+            (click)="setOpen()"
+          >
+            Edit
+          </button>
+        </td>
+        <td
+          [style.background-color]="userColors.get(user.id)?.background"
+          [style.color]="userColors.get(user.id)?.text"
+        >
+          <button class="btn btn-secondary" (click)="setRandomColor(user.id)">
+            Change Color
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

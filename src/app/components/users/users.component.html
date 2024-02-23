@@ -1,0 +1,29 @@
+<button
+  class="btn btn-lg btn-outline-primary m-3"
+  routerLink="/users/add-user"
+  (click)="open()"
+>
+  Add User
+</button>
+
+<input
+  id="filterInput"
+  class="form-control m-3 w-50"
+  type="text"
+  placeholder="Filter..."
+  [(ngModel)]="filterText"
+  (input)="filterUsers(filterText)"
+/>
+
+<div class="form-group m-3 w-50">
+  <label for="exampleSelect">Select Example</label>
+  <select class="form-control" id="exampleSelect" [(ngModel)]="selectedValue" (change)="onSortChange()">
+      <option value="A-Z">A-Z</option>
+      <option value="Z-A">Z-A</option>
+      <option value="All">All</option>
+  </select>
+</div>
+
+
+
+<app-users-list [users]="filteredUsers"></app-users-list>
